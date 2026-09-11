@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusCarry — Student Powered Campus Delivery</title>
+<meta name="description" content="CampusCarry connects hostel students who need items with students already near N.K Food Court and Food Court 2.">
+<style>
+:root{
+  --blue:#1769e0; --blue2:#0d47a1; --green:#159957; --ink:#122033;
+  --muted:#617084; --bg:#f6f9fe; --card:#fff; --border:#e5ebf3;
+  --shadow:0 12px 35px rgba(25,65,120,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.container{width:min(1120px,92%);margin:auto}
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#58a0ff);display:grid;place-items:center;color:white;font-size:20px;box-shadow:0 8px 20px rgba(23,105,224,.25)}
+.nav-links{display:flex;gap:22px;color:#526174;font-size:14px;font-weight:600}
+.nav-links a:hover{color:var(--blue)}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:var(--blue);color:white;box-shadow:0 8px 18px rgba(23,105,224,.22)}
+.btn-primary:hover{transform:translateY(-1px);background:var(--blue2)}
+.btn-light{background:white;color:var(--blue);border:1px solid #dce7f7}
+.btn-green{background:var(--green);color:#fff}
+.hero{padding:76px 0 58px;background:radial-gradient(circle at 85% 20%,#dbeaff 0,transparent 32%),linear-gradient(180deg,#fff 0,#f6f9fe 100%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;background:#e9f2ff;color:var(--blue2);border:1px solid #d5e5ff;border-radius:999px;padding:7px 12px;font-size:13px;font-weight:750}
+h1{font-size:clamp(40px,6vw,68px);line-height:1.04;margin:18px 0}
+.hero p{font-size:18px;color:var(--muted);max-width:650px}
+.hero-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.hero-card{background:white;border:1px solid var(--border);border-radius:26px;padding:18px;box-shadow:var(--shadow);position:relative}
+.phone{max-width:330px;margin:auto;border:9px solid #142238;border-radius:36px;overflow:hidden;background:#f7faff;box-shadow:0 25px 55px rgba(19,44,82,.22)}
+.phone-top{height:35px;background:#142238;color:white;display:flex;align-items:center;justify-content:center;font-size:11px}
+.app-screen{padding:18px}
+.app-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.app-title{font-size:20px;font-weight:800}
+.mini-card{background:white;border:1px solid var(--border);padding:13px;border-radius:15px;margin:10px 0}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.price{font-weight:800;color:var(--green)}
+.small{font-size:12px;color:var(--muted)}
+.pill{font-size:11px;padding:5px 8px;border-radius:999px;background:#eaf8f1;color:#16814c;font-weight:750}
+.section{padding:78px 0}
+.section-head{text-align:center;max-width:750px;margin:0 auto 38px}
+.section-head h2{font-size:36px;margin:0 0 10px}
+.section-head p{color:var(--muted);margin:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;box-shadow:0 8px 25px rgba(25,65,120,.05)}
+.icon{width:46px;height:46px;border-radius:14px;background:#eaf2ff;color:var(--blue);display:grid;place-items:center;font-size:22px;margin-bottom:15px}
+.card h3{margin:0 0 8px;font-size:19px}
+.card p{color:var(--muted);margin:0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{position:relative;text-align:center}
+.step-number{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:white;font-weight:850;margin:0 auto 13px}
+.step h3{margin:0 0 5px}
+.step p{font-size:14px;color:var(--muted)}
+.demo{background:#0e1f38;color:white;border-radius:28px;padding:42px}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.demo h2{font-size:35px;margin:0 0 10px}
+.demo p{color:#c4d0df}
+.form{background:white;border-radius:20px;padding:22px;color:var(--ink)}
+.field{margin-bottom:13px}
+label{display:block;font-size:13px;font-weight:750;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #dce4ee;border-radius:10px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #eaf2ff}
+textarea{min-height:80px;resize:vertical}
+.notice{padding:12px;border-radius:12px;background:#edf8f2;color:#18764a;font-size:13px;margin:12px 0;display:none}
+.request-list{display:grid;gap:12px}
+.request{background:white;border:1px solid var(--border);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.request .btn{padding:9px 13px;font-size:13px}
+.dashboard{display:grid;grid-template-columns:230px 1fr;gap:18px}
+.side{background:#10223d;color:white;border-radius:20px;padding:14px;height:max-content}
+.side button{display:block;width:100%;text-align:left;background:transparent;color:#cbd6e6;border:0;padding:12px;border-radius:10px;cursor:pointer}
+.side button.active,.side button:hover{background:#1e5fbd;color:white}
+.panel{background:white;border:1px solid var(--border);border-radius:20px;padding:24px}
+.tab{display:none}.tab.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat{padding:17px;border-radius:15px;background:#f6f9fe;border:1px solid var(--border)}
+.stat strong{display:block;font-size:25px}
+.timeline{border-left:2px solid #dce8f8;margin:18px 0 0 8px;padding-left:22px}
+.timeline div{position:relative;margin:0 0 20px}
+.timeline div:before{content:"";position:absolute;left:-30px;top:5px;width:10px;height:10px;background:var(--blue);border-radius:50%;box-shadow:0 0 0 4px #eaf2ff}
+footer{padding:45px 0;background:#0b1a2d;color:#b8c5d6}
+.footer-grid{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+footer .logo{color:white}
+.toast{position:fixed;right:20px;bottom:20px;background:#122033;color:white;padding:13px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:40}
+@media(max-width:850px){
+ .nav-links{display:none}.hero-grid,.demo-grid{grid-template-columns:1fr}
+ .grid-3,.grid-4,.steps{grid-template-columns:1fr 1fr}
+ .dashboard{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .grid-3,.grid-4,.steps,.stats{grid-template-columns:1fr}
+ .hero{padding-top:50px}.section{padding:55px 0}
+ h1{font-size:43px}.demo{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo"><span class="logo-mark">🚚</span> CampusCarry</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#locations">Locations</a>
+      <a href="#demo">Try demo</a>
+      <a href="#dashboard">Dashboard</a>
+    </div>
+    <a href="#demo" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<main id="home">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">🎓 Built for campus life</span>
+      <h1>Need something?<br><span style="color:var(--blue)">We'll get it for you.</span></h1>
+      <p>CampusCarry connects hostel students who need food, stationery and everyday items with students already near the N.K Food Court and Food Court 2.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#demo">Create a request →</a>
+        <a class="btn btn-light" href="#how">See how it works</a>
+      </div>
+      <p class="small" style="margin-top:15px">Prototype concept for a university campus. Not an official LPU service.</p>
+    </div>
+    <div class="hero-card">
+      <div class="phone">
+        <div class="phone-top">9:41　　CampusCarry</div>
+        <div class="app-screen">
+          <div class="app-header"><div><div class="small">Hello, Student 👋</div><div class="app-title">What do you need?</div></div><span>🔔</span></div>
+          <div class="mini-card" style="background:#eaf2ff;border:0">
+            <b>Create a request</b>
+            <div class="small">Get a nearby student to bring it to your hostel.</div>
+            <button class="btn btn-primary" style="margin-top:10px;width:100%" onclick="document.querySelector('#item').focus()">Create Request →</button>
+          </div>
+          <div class="row"><b>Nearby requests</b><span class="small">View all</span></div>
+          <div class="mini-card"><div class="row"><b>🍕 Pizza (2)</b><span class="price">₹30</span></div><div class="small">N.K N.K Food Court → Boys Hostel 5 · 0.8 km</div></div>
+          <div class="mini-card"><div class="row"><b>🥤 Cold Drink</b><span class="price">₹20</span></div><div class="small">N.K N.K Food Court → Boys Hostel 6 · 1.2 km</div></div>
+          <div class="mini-card"><div class="row"><b>📚 Stationery</b><span class="price">₹20</span></div><div class="small">N.K N.K Food Court → Boys Hostel 5 · 1.5 km</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="container">
+    <div class="section-head">
+      <h2>A simple campus problem</h2>
+      <p>Large campuses make small errands inconvenient. CampusCarry turns students' existing movement into a helpful delivery network.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="icon">🏫</div><h3>Large campus</h3><p>Hostels can be 1–1.5 km away from food courts, shops and other facilities near the main gate.</p></div>
+      <div class="card"><div class="icon">🚶</div><h3>Students are already moving</h3><p>Many students are already going toward N.K Food Court and Food Court 2. They can carry an item for someone else.</p></div>
+      <div class="card"><div class="icon">💰</div><h3>Everyone benefits</h3><p>The requester saves time, the helper earns a service fee, and local campus businesses can get more orders.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how" style="background:white">
+  <div class="container">
+    <div class="section-head"><h2>How CampusCarry works</h2><p>One request, one nearby helper, one simple delivery.</p></div>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><h3>Create request</h3><p>Tell us what you need and where it should be picked up.</p></div>
+      <div class="step"><div class="step-number">2</div><h3>Find a helper</h3><p>Students near that location see the request and can accept it.</p></div>
+      <div class="step"><div class="step-number">3</div><h3>Pick up & deliver</h3><p>The helper buys or collects the item and brings it to the hostel.</p></div>
+      <div class="step"><div class="step-number">4</div><h3>Confirm & earn</h3><p>Delivery is confirmed with an OTP and the helper receives the service fee.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="locations" style="background:#fff">
+  <div class="container">
+    <div class="section-head">
+      <h2>Campus locations</h2>
+      <p>The first prototype focuses on Boys Hostel 5, Boys Hostel 6 and two food-court pickup points.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="icon">🏠</div><h3>Boys Hostel 5</h3><p>Delivery destination for hostel students requesting food and essentials.</p></div>
+      <div class="card"><div class="icon">🏠</div><h3>Boys Hostel 6</h3><p>Delivery destination for students using the CampusCarry service.</p></div>
+      <div class="card"><div class="icon">🍔</div><h3>N.K Food Court</h3><p>Primary pickup location where nearby student helpers can collect requests.</p></div>
+      <div class="card"><div class="icon">🍱</div><h3>Food Court 2</h3><p>Second food-court pickup point included in the prototype.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head"><h2>Core features</h2><p>The first version should stay simple, useful and easy for students to understand.</p></div>
+    <div class="grid-4">
+      <div class="card"><div class="icon">📍</div><h3>Nearby matching</h3><p>Show requests relevant to students near N.K Food Court and Food Court 2.</p></div>
+      <div class="card"><div class="icon">💬</div><h3>Chat</h3><p>Requester and helper can clarify the item and delivery details.</p></div>
+      <div class="card"><div class="icon">🔐</div><h3>Student verification</h3><p>Use university registration details or approved student authentication.</p></div>
+      <div class="card"><div class="icon">⭐</div><h3>Ratings</h3><p>Build trust with ratings and completed-delivery history.</p></div>
+      <div class="card"><div class="icon">🔢</div><h3>Delivery OTP</h3><p>A short confirmation code helps prevent delivery disputes.</p></div>
+      <div class="card"><div class="icon">💳</div><h3>Service fee</h3><p>Keep item cost separate from the helper's service charge.</p></div>
+      <div class="card"><div class="icon">🚶</div><h3>I'm going there</h3><p>Helpers can announce that they are already travelling toward a location.</p></div>
+      <div class="card"><div class="icon">📊</div><h3>History & earnings</h3><p>Students can review previous requests, deliveries and earnings.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="demo">
+  <div class="container">
+    <div class="demo">
+      <div class="demo-grid">
+        <div>
+          <span class="badge">Live front-end prototype</span>
+          <h2>Create a sample delivery request</h2>
+          <p>Use this form to demonstrate the core idea during your project presentation. The prototype stores the request locally in your browser.</p>
+          <div class="notice" id="notice"></div>
+        </div>
+        <form class="form" onsubmit="createRequest(event)">
+          <div class="field"><label for="item">What do you need?</label><input id="item" required placeholder="e.g. 2 burgers + 2 cold drinks"></div>
+          <div class="field"><label for="pickup">Pickup location</label>
+            <select id="pickup"><option>N.K Food Court</option><option>N.K Food Court</option><option>N.K Food Court</option><option>Food Court 2</option><option>Other</option></select>
+          </div>
+          <div class="field"><label for="delivery">Delivery location</label>
+            <select id="delivery"><option>Boys Hostel 5</option><option>Boys Hostel 6</option><option>Boys Hostel 5</option><option>Boys Hostel 6</option></select>
+          </div>
+          <div class="field"><label for="fee">Service fee (₹)</label><input id="fee" type="number" min="20" value="30"></div>
+          <div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" placeholder="Any special instructions?"></textarea></div>
+          <button class="btn btn-primary" style="width:100%">Post Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dashboard">
+  <div class="container">
+    <div class="section-head"><h2>App dashboard prototype</h2><p>This section demonstrates the main screens your team can later turn into a real mobile app.</p></div>
+    <div class="dashboard">
+      <aside class="side">
+        <button class="active" onclick="showTab('homeTab',this)">🏠 Home</button>
+        <button onclick="showTab('requestsTab',this)">📋 Available Requests</button>
+        <button onclick="showTab('ordersTab',this)">📦 My Orders</button>
+        <button onclick="showTab('earningsTab',this)">💰 Earnings</button>
+        <button onclick="showTab('profileTab',this)">👤 Profile</button>
+      </aside>
+      <div class="panel">
+        <div class="tab active" id="homeTab">
+          <h3>Good evening, Student 👋</h3>
+          <div class="stats"><div class="stat"><span class="small">Active requests</span><strong id="activeCount">3</strong></div><div class="stat"><span class="small">Completed</span><strong>12</strong></div><div class="stat"><span class="small">Rating</span><strong>4.8 ⭐</strong></div></div>
+          <h3 style="margin-top:28px">Recent activity</h3>
+          <div class="request-list" id="recentList">
+            <div class="request"><div><b>🍕 Pizza (2)</b><div class="small">N.K N.K Food Court → Boys Hostel 6</div></div><span class="pill">₹30</span></div>
+            <div class="request"><div><b>🥤 Cold Drink</b><div class="small">N.K N.K Food Court → Boys Hostel 6</div></div><span class="pill">₹20</span></div>
+          </div>
+        </div>
+
+        <div class="tab" id="requestsTab">
+          <div class="row"><div><h3 style="margin:0">Available requests</h3><span class="small">You are near N.K Food Court</span></div><span class="pill">🟢 Available</span></div>
+          <div class="request-list" style="margin-top:18px">
+            <div class="request"><div><b>🍔 Burger + Drink</b><div class="small">N.K N.K Food Court → Boys Hostel 5 · 0.6 km</div><span class="price">₹25 service fee</span></div><button class="btn btn-green" onclick="acceptRequest(this)">Accept</button></div>
+            <div class="request"><div><b>🍕 Pizza (2)</b><div class="small">N.K N.K Food Court → Boys Hostel 6 · 0.9 km</div><span class="price">₹30 service fee</span></div><button class="btn btn-green" onclick="acceptRequest(this)">Accept</button></div>
+            <div class="request"><div><b>📚 Stationery</b><div class="small">N.K N.K Food Court → Boys Hostel 5 · 1.5 km</div><span class="price">₹20 service fee</span></div><button class="btn btn-green" onclick="acceptRequest(this)">Accept</button></div>
+          </div>
+        </div>
+
+        <div class="tab" id="ordersTab">
+          <h3>My orders</h3>
+          <div class="timeline">
+            <div><b>Request accepted</b><div class="small">Pizza (2) · 10:15 PM</div></div>
+            <div><b>Item picked up</b><div class="small">N.K Food Court · 10:32 PM</div></div>
+            <div><b>On the way</b><div class="small">ETA 10:45 PM</div></div>
+            <div><b>Delivered</b><div class="small">Waiting for confirmation</div></div>
+          </div>
+        </div>
+
+        <div class="tab" id="earningsTab">
+          <h3>Earnings</h3>
+          <div class="stat" style="margin:15px 0"><span class="small">Total service fees earned</span><strong>₹320</strong></div>
+          <div class="request-list">
+            <div class="request"><span>12 Sep · Pizza</span><b class="price">+₹30</b></div>
+            <div class="request"><span>10 Sep · Cold Drink</span><b class="price">+₹25</b></div>
+            <div class="request"><span>8 Sep · Stationery</span><b class="price">+₹20</b></div>
+          </div>
+        </div>
+
+        <div class="tab" id="profileTab">
+          <h3>Student profile</h3>
+          <div class="card" style="box-shadow:none">
+            <div style="font-size:38px">👨‍🎓</div>
+            <h3 style="margin-top:10px">Student Name</h3>
+            <p>Registration ID: 22XXXXXX</p>
+            <p>Hostel: Boys Hostel 5</p>
+            <p>Rating: ⭐ 4.8 · 12 completed deliveries</p>
+            <span class="pill">✓ Verified Student</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="future" style="background:white">
+  <div class="container">
+    <div class="section-head"><h2>Future possibilities</h2><p>Start with food and essentials. Grow into a complete campus logistics platform.</p></div>
+    <div class="grid-3">
+      <div class="card"><div class="icon">🍱</div><h3>Food & essentials</h3><p>Food, drinks, stationery and everyday necessities.</p></div>
+      <div class="card"><div class="icon">📦</div><h3>Campus services</h3><p>Printouts, parcels, library material, laundry collection and other campus errands.</p></div>
+      <div class="card"><div class="icon">👥</div><h3>Group orders</h3><p>Combine multiple hostel requests into one pickup to reduce cost and effort.</p></div>
+      <div class="card"><div class="icon">🤖</div><h3>Smart matching</h3><p>Match requests with helpers based on distance, route, reliability and urgency.</p></div>
+      <div class="card"><div class="icon">🏪</div><h3>Business partnerships</h3><p>Partner with nearby shops and food outlets for direct ordering and promotions.</p></div>
+      <div class="card"><div class="icon">🌐</div><h3>Multi-campus expansion</h3><p>After proving the model on one campus, expand to other universities.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><div class="logo"><span class="logo-mark">🚚</span> CampusCarry</div><p style="max-width:470px">Students helping students — one request at a time.</p></div>
+    <div><b>Project prototype</b><p class="small" style="color:#9eb0c6">Designed for an academic/startup project demonstration.</p></div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+function showTab(id, btn){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.side button').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+}
+function createRequest(e){
+  e.preventDefault();
+  const item=document.getElementById('item').value;
+  const pickup=document.getElementById('pickup').value;
+  const delivery=document.getElementById('delivery').value;
+  const fee=document.getElementById('fee').value;
+  const notice=document.getElementById('notice');
+  notice.style.display='block';
+  notice.textContent=`Request posted: ${item} · ${pickup} → ${delivery} · ₹${fee} service fee`;
+  document.getElementById('recentList').insertAdjacentHTML('afterbegin',
+    `<div class="request"><div><b>🆕 ${escapeHtml(item)}</b><div class="small">${escapeHtml(pickup)} → ${escapeHtml(delivery)}</div></div><span class="pill">₹${escapeHtml(fee)}</span></div>`
+  );
+  document.getElementById('activeCount').textContent='4';
+  e.target.reset();
+  document.getElementById('fee').value=30;
+}
+function acceptRequest(btn){
+  btn.textContent='Accepted ✓';
+  btn.disabled=true;
+  btn.style.opacity='.7';
+  showToast('Request accepted. You can now contact the requester.');
+}
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block';
+  setTimeout(()=>t.style.display='none',2600);
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+</script>
+</body>
+</html>
